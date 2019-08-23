@@ -42,7 +42,7 @@ O retorno da consulta a API deve ser realizado em formato JSON e seguindo a estr
     ]
 }
 ```
-As imagens de cada medicamento, estão no diretório **challenge/images**.
+As imagens (avatar) de cada medicamento, estão no diretório **challenge/images**.
 
 Além de retornar dados dos medicamentos contidos no banco de dados, a API também deverá permitir a persistência dos dados do pedido *(lista de medicamentos, com suas respectivas quantidades, reservados pelo usuário - ver fim da **Segunda Etapa**)*.
 
