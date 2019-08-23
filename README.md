@@ -3,7 +3,7 @@
 **Atenção, Dev!**
 
 Antes de "meter a mão na massa", leia com atenção todas as instruções abaixo.
-Não ignore os detalhes e aproveite para mostrar ao mundo todo o seu potencial e eficácia.
+Não ignore os detalhes e aproveite para mostrar ao mundo todo o seu potencial.
 
 
 ## Primeira Etapa - API (backend)
