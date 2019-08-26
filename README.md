@@ -20,7 +20,7 @@ Os dados de cada medicamento são:
 - Valor (R$) do medicamento
 - Estoque inicial (unidades)
 
-Primeiramente os dados dos 18 medicamentos devem ser cadastrado em uma tabela de banco de dados MariaDB através de uma SEEDER do LARAVEL, com base em um documento chamado **"lista_medicamentos.xlsx"** que está disponível no diretório **"challenge"**.
+Primeiramente os dados dos 18 medicamentos devem ser cadastrados em uma tabela de banco de dados MariaDB através de uma SEEDER do LARAVEL, com base em um documento chamado **"lista_medicamentos.xlsx"** que está disponível no diretório **"challenge"**.
 
 Logo após, a API deve ser construída para a responder a buscas feitas pelo nome do princípio ativo, nome do medicamento e nome do laboratório.
 
@@ -77,10 +77,10 @@ Esta SPA deverá conter duas rotas: Uma de busca e reserva dos medicamentos e ou
 Em cada linha da lista, como última coluna, também deve haver um botão pelo qual o usuário consiga desfazer a reserva daquele medicamento.
 
 A última linha da lista deverá exibir as seguintes colunas / informações:
-- Somatório das quantidades de medicamentos reservados ;
+- Somatório das quantidades de medicamentos reservados;
 - Total geral do pedido em reais (R$).
 
-Logo abaixo da lista, deverá haver um botão chamado **"Concluir Pedido"** que deve realizar as seguintes ações:
+Logo abaixo da lista, deverá haver um botão chamado **"Concluir Pedido"**, que deve realizar as seguintes ações:
 
 - Persistir os dados do pedido no banco de dados através da API;
 - Imprimir os dados do pedido em formato **PDF**. 
@@ -101,14 +101,14 @@ Se liga nessas informações importantes para o início e conclusão do desafio:
 
 - Crie um **fork** e desenvolva a sua solução nele.
 - Você terá **4 dias a partir da data do envio do desafio** para concluí-lo.
-- Crie um **PROJECT.md** com a explicação de como devemos executar o projeto e o máximo de detalhes possível sobre o que foi feito e como foi feito (bibliotecas utilizadas, o porque de utilizá-las, etc).
+- Crie um **PROJECT.md** com a explicação de como devemos executar o projeto e o máximo de detalhes possível sobre o que foi feito e como foi feito (bibliotecas utilizadas, o porquê de utilizá-las, etc).
 - Após concluir todas as tarefas, faça um **pull request**.
-- Envie um e-mail para "**devteam@cdts.fiocruz.br**" com o link do seu **pull request** e com o assunto "**challenge accepted**".
+- Envie um E-mail para "**devteam@cdts.fiocruz.br**" com o link do seu **pull request** e com o assunto "**challenge accepted**".
 
-Caso tenha alguma dívida, entre em contato conosco também através do e-mail "**devteam@cdts.fiocruz.br**".
+Caso tenha alguma dívida, entre em contato conosco também através do E-mail "**devteam@cdts.fiocruz.br**".
 
 ___
 ### **Bom... Por enquanto é só isso tudo.**
 
-Um excelente desafio e que a força esteja com você o/
-#### **Let`s Go!**
+Um excelente desafio e que a força esteja com você! o/
+#### **Let's Go!**
