@@ -54,7 +54,7 @@ Esta SPA deverá conter duas rotas: Uma de busca e reserva dos medicamentos e ou
 
 **A primeira rota** deverá conter os seguintes componentes e funcionalidades:
 
-- O usuário poderá realizar a busca através do nome do medicamento, princípio ativo e nome do laboratório.
+- O usuário poderá realizar a busca pelo do nome do medicamento, princípio ativo ou nome do laboratório utilizando um mesmo campo para isso.
 
 - Quando a busca for realizada, a SPA deve mostrar todos os medicamentos que tenham correspondido ao filtro estabelecido pelo usuário.
 
@@ -92,6 +92,7 @@ ___
 - Desempenho;
 - Manutenabilidade;
 - Organização;
+- Conhecimento ferramental;
 - Boas práticas.
 
 ___
