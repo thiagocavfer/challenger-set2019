@@ -104,9 +104,9 @@ Se liga nessas informações importantes para o início e conclusão do desafio:
 - Você terá **4 dias a partir da data do envio do desafio** para concluí-lo.
 - Crie um **PROJECT.md** com a explicação de como devemos executar o projeto e o máximo de detalhes possível sobre o que foi feito e como foi feito (bibliotecas utilizadas, o porquê de utilizá-las, etc).
 - Após concluir todas as tarefas, faça um **pull request**.
-- Envie um E-mail para "**devteam@cdts.fiocruz.br**" com o link do seu **pull request** e com o assunto "**challenge accepted**".
+- Envie um E-mail para "**thiago.ferreira@cdts.fiocruz.br**" com o link do seu **pull request** e com o assunto "**challenge accepted**".
 
-Caso tenha alguma dívida, entre em contato conosco também através do E-mail "**devteam@cdts.fiocruz.br**".
+Caso tenha alguma dívida, entre em contato conosco também através do E-mail "**thiago.ferreira@cdts.fiocruz.br**".
 
 ___
 ### **Bom... Por enquanto é só isso tudo.**
