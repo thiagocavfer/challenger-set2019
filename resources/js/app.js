@@ -4,6 +4,11 @@
  * building robust, powerful web applications using React + Laravel.
  */
 
+
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+
+
+
 require('./bootstrap');
 
 /**
@@ -12,4 +17,4 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
+require('./components/App');
