@@ -17,8 +17,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//
 $routes= [
     '/produtos' => 'API\ProdutoController',
     '/pedidos' => 'API\PedidoController',
 ];
+
+//
 Route::resources($routes);
+
+
+//
+Route::prefix('produtos')->name('produtos.')->group(function(){
+    Route::get('/order-by/{param}/{order?}', 'API\ProdutoSearchController@listOrderBy')->name('list.orderBy');
+    Route::get('/search/{param}', 'API\ProdutoSearchController@search')->name('search');
+    Route::get('/search/{param}/{orderby}/{order?}', 'API\ProdutoSearchController@searchOrder')->name('search.order');
+});
+
+
+
+
