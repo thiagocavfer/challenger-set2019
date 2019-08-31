@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch, HashRouter, Redirect } from 'react-router-dom'
-import Header from './Header'
-import HomeComponent from './HomeComponent'
 import ProductsComponent from './ProductsComponent'
 
 
@@ -12,11 +10,9 @@ class App extends Component {
     return (
        <BrowserRouter>
         <div>
-          <Header />
-          <Redirect exact path='/' to='/produtos' />
+
           <Switch>
-            <Route exact path='/home' component={HomeComponent} />
-            <Route exact path='/produtos' component={ProductsComponent} />
+            <Route exact path='/' component={ProductsComponent} />
           </Switch>
         </div>
        </BrowserRouter>
@@ -25,7 +21,7 @@ class App extends Component {
 }
 
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('home'))
 
 
 

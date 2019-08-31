@@ -21,9 +21,16 @@ try {
 
 window.axios = require('axios');
 
+window.user = {}
+window.carrinho = {}
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('api_key')}`;
 
+window.user.id = sessionStorage.getItem('user_id')
+
+window.carrinho.id = sessionStorage.getItem('carrinho_id')
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 

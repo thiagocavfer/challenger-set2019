@@ -1,42 +1,48 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { formatCurrency } from '../formatter'
+import style from './style'
+import CartComponent from './CartComponent'
+
 
 class HomeComponent extends Component {
-  constructor () {
-    super()
 
-    this.state = {
-      produtos: []
+    constructor() {
+        super()
+
+        this.state = {
+            produtos: [],
+            carrinho: {}
+        }
     }
-  }
 
-  componentDidMount () {
-    axios.get('/api/produtos').then(response => {
-      this.setState({
-        produtos: response.data
-      })
-    })
-  }
 
-  render () {
-      const { produtos } = this.state.produtos
-    return (
-      <div className='container py-4'>
-        <div className='row justify-content-center'>
-          <div className='col-md-8'>
-            <div className='card'>
-              <div className='card-header'>HOME</div>
+   async componentDidMount() {
 
-              <div className='card-body'>
+      await axios.get(`/api/carrinhos?user_id=${user.id}`)
+            .then((res) => {
+                let produtos = res.data.data.produtos
+                let carrinho = res.data.data.carrinho
+                this.setState({ produtos })
+                this.setState({ carrinho })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
-              </div>
+
+    render() {
+        const produtos = this.state.produtos
+        const carrinho = this.state.carrinho
+        return (
+            <div>
+
+                <CartComponent produtos={produtos} carrinho={carrinho} />
+
             </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+        )
+    }
 }
 
 export default HomeComponent
