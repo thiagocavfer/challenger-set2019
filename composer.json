@@ -1,9 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "glauberm/cdts",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Desafio para disputa da vaga de Full Stack Pleno da TIC-CDTS.",
     "keywords": [
-        "framework",
         "laravel"
     ],
     "license": "MIT",
