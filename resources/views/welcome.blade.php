@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{asset('css/welcome.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -34,14 +35,6 @@
             <div class="title m-b-md">
                 Challenge
             </div>
-
-            <div class="links">
-
-            </div>
-
-
-
-
         </div>
     </div>
 </body>
