@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<ruleset name="CDTS">
+  <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+    <exclude-pattern>*/database/*</exclude-pattern>
+  </rule>
+</ruleset>
