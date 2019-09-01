@@ -3,17 +3,14 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\Medicine;
 
 class MedicineCollection extends ResourceCollection
 {
     /**
-     * Transform the resource collection into an array.
+     * The resource that this resource collects.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * @var string
      */
-    public function toArray($request)
-    {
-        return parent::toArray($request);
-    }
+    public $collects = Medicine::class;
 }
