@@ -93723,8 +93723,16 @@ function (_Component) {
     value: function concluir() {
       axios.post('/api/pedidos', {
         user_id: user.id
+      }, {
+        responseType: 'blob'
       }).then(function (res) {
-        alert(res.data.data.message);
+        var url = window.URL.createObjectURL(new Blob([res.data]));
+        var link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'pedido.pdf'); //or any other extension
+
+        document.body.appendChild(link);
+        link.click();
       })["catch"](function (err) {
         console.log(err);
       });
@@ -94010,7 +94018,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeComponent).call(this));
     _this.state = {
       produtos: [],
-      carrinho: {}
+      carrinho: {},
+      pedidos: []
     };
     _this.refresh = _this.refresh.bind(_assertThisInitialized(_this));
     return _this;
@@ -94020,26 +94029,41 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.loadData("/api/carrinhos?user_id=".concat(user.id));
+      this.listOrders("/api/pedidos?user_id=".concat(user.id));
     }
   }, {
     key: "refresh",
     value: function refresh() {
       this.loadData("/api/carrinhos?user_id=".concat(user.id));
+      this.listOrders("/api/pedidos?user_id=".concat(user.id));
+    }
+  }, {
+    key: "listOrders",
+    value: function listOrders(url) {
+      var _this2 = this;
+
+      axios.get(url).then(function (res) {
+        _this2.setState({
+          pedidos: res.data
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }, {
     key: "loadData",
     value: function loadData(url) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get(url).then(function (res) {
         var produtos = res.data.data.produtos;
         var carrinho = res.data.data.carrinho;
 
-        _this2.setState({
+        _this3.setState({
           produtos: produtos
         });
 
-        _this2.setState({
+        _this3.setState({
           carrinho: carrinho
         });
       })["catch"](function (err) {
@@ -94051,6 +94075,7 @@ function (_Component) {
     value: function render() {
       var produtos = this.state.produtos;
       var carrinho = this.state.carrinho;
+      var pedidos = this.state.pedidos;
       var action = this.refresh;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid"
@@ -94062,7 +94087,9 @@ function (_Component) {
         carrinho: carrinho
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OrdersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OrdersComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        pedidos: pedidos
+      })));
     }
   }]);
 
@@ -94086,6 +94113,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _formatter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../formatter */ "./resources/js/formatter.js");
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94108,6 +94137,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var OrdersComponent =
 /*#__PURE__*/
 function (_Component) {
@@ -94119,35 +94149,31 @@ function (_Component) {
     _classCallCheck(this, OrdersComponent);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(OrdersComponent).call(this));
-    _this.state = {
-      pedidos: []
-    };
-    _this.listOrders = _this.listOrders.bind(_assertThisInitialized(_this));
+    _this.printPDF = _this.printPDF.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(OrdersComponent, [{
-    key: "listOrders",
-    value: function listOrders(url) {
-      var _this2 = this;
+    key: "printPDF",
+    value: function printPDF(pedido_id) {
+      axios.get("/api/pedidos/print-pdf/".concat(pedido_id), {
+        responseType: 'blob'
+      }).then(function (res) {
+        var url = window.URL.createObjectURL(new Blob([res.data]));
+        var link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'pedido.pdf'); //or any other extension
 
-      axios.get(url).then(function (res) {
-        _this2.setState({
-          pedidos: res.data
-        });
-      })["catch"](function (err) {
-        console.log(err);
+        document.body.appendChild(link);
+        link.click();
       });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.listOrders("/api/pedidos?user_id=".concat(user.id));
     }
   }, {
     key: "render",
     value: function render() {
-      var pedidos = this.state.pedidos;
+      var _this2 = this;
+
+      var pedidos = this.props.pedidos;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -94164,10 +94190,10 @@ function (_Component) {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "list-group"
-      }, pedidos.map(function (pedido) {
+      }, pedidos.map(function (pedido, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "list-group-item",
-          key: pedido.id
+          key: index
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Pedido n\xBA: ", pedido.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "list-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -94194,15 +94220,15 @@ function (_Component) {
           }, " ", Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(p.valor_unitario), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             className: "list-group-item"
           }, " unidades: ", p.pivot.quantidade, " "));
-        }))));
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6 offset-md-3 text-center"
-      }, pedidos.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {},
-        className: "btn btn-outline-primary btn-block"
-      }, "PDF") : '')))))));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-3 offset-md-9 text-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.printPDF(pedido.id);
+          },
+          className: "btn btn-outline-primary btn-block"
+        }, "PDF"))));
+      }))))))));
     }
   }]);
 

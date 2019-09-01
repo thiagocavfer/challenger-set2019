@@ -13,7 +13,8 @@ class HomeComponent extends Component {
 
         this.state = {
             produtos: [],
-            carrinho: {}
+            carrinho: {},
+            pedidos:[]
         }
         this.refresh = this.refresh.bind(this)
     }
@@ -21,14 +22,26 @@ class HomeComponent extends Component {
 
     componentDidMount() {
         this.loadData(`/api/carrinhos?user_id=${user.id}`)
+        this.listOrders(`/api/pedidos?user_id=${user.id}`)
     }
 
 
     refresh(){
         this.loadData(`/api/carrinhos?user_id=${user.id}`)
+        this.listOrders(`/api/pedidos?user_id=${user.id}`)
     }
 
-    
+
+
+    listOrders(url) {
+        axios.get(url).then(res => {
+            this.setState({ pedidos: res.data })
+        })
+            .catch(err => { console.log(err) })
+    }
+
+
+
     loadData(url){
         axios.get(url)
             .then((res) => {
@@ -45,6 +58,8 @@ class HomeComponent extends Component {
     render() {
         const produtos = this.state.produtos
         const carrinho = this.state.carrinho
+        const pedidos = this.state.pedidos
+
         const action = this.refresh
         return (
             <div className='container-fluid'>
@@ -53,7 +68,7 @@ class HomeComponent extends Component {
                 </div>
                 <br /><hr /><br />
                 <div className='row'>
-                  <OrdersComponent />
+                  <OrdersComponent pedidos={pedidos} />
                 </div>
             </div>
         )

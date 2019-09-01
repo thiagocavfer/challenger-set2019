@@ -21,10 +21,14 @@ class CartComponent extends Component {
 
 
    concluir(){
-
-       axios.post('/api/pedidos', { user_id: user.id})
+       axios.post('/api/pedidos', { user_id: user.id }, { responseType: 'blob' })
           .then(res => {
-               alert(res.data.data.message)
+              const url = window.URL.createObjectURL(new Blob([res.data]));
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', 'pedido.pdf'); //or any other extension
+              document.body.appendChild(link);
+              link.click();
           })
         .catch(err => {
               console.log(err)
