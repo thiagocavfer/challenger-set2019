@@ -38,6 +38,11 @@ Route::prefix('produtos')->name('produtos.')->group(function(){
 });
 
 
+//
+Route::prefix('pedidos')->name('pedidos.')->group(function () {
+    Route::get('/print-pdf/{pedido_id}', 'API\PedidoController@printPDF')->name('print.pdf');
+});
+
 
 
 Route::get('/front-page' , 'API\ProdutoController@index')->name('front');

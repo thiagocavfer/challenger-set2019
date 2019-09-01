@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Pedidos\Pedido;
 use App\Models\Pedidos\IPedido;
+use App\Models\Pedidos\FileHandler as PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,8 +45,8 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
 
-        $this->repository->save($request);
-        return  response()->json(['data' => ['message' => 'success']]);
+        $pedido_id = $this->repository->save($request);
+        return (new PDF($this->repository))->generatePDF($pedido_id);
     }
 
     /**
@@ -57,7 +58,7 @@ class PedidoController extends Controller
     public function show(Pedido $pedido)
     {
         //
-       return $this->repository->orderDetails($pedido);
+       return response()->json([ 'data' => $this->repository->orderDetails($pedido)]);
     }
 
 
@@ -84,4 +85,15 @@ class PedidoController extends Controller
     {
         //
     }
+
+
+
+
+    public function printPDF($pedido_id){
+      return  (new PDF($this->repository))->generatePDF($pedido_id);
+    }
+
+
+
+
 }

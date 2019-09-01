@@ -19,11 +19,16 @@ class PedidoRepository implements IPedido{
         foreach($user->carrinho->produtos as $p){
            //
            $pivotData= ['quantidade' => $p->pivot->quantidade, 'valor_unitario' => $p->valor_unitario];
+
+           $p->estoque_inicial = ($p->estoque_inicial - $p->pivot->quantidade);
+           $p->save();
+
            $pedido->produtos()->save($p, $pivotData);
         }
         $user->pedidos()->save($pedido);
         $user->carrinho->produtos()->detach();
 
+        return $pedido->id;
     }
 
 
