@@ -27,10 +27,10 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return $this->repository->listAll();
+        return $this->repository->listAll($request->user_id);
     }
 
 
@@ -57,6 +57,7 @@ class PedidoController extends Controller
     public function show(Pedido $pedido)
     {
         //
+       return $this->repository->orderDetails($pedido);
     }
 
 

@@ -13,16 +13,12 @@ class CarrinhoRepository implements ICarrinho{
 
 
         $carrinho = (User::find($request->user_id))->carrinho;
-        $carrinho->produtos()->attach($request->id, [ 'quantidade' => $request->unid ,'created_at' => now()]);
+        $pivotData= ['quantidade' => $request->unid, 'valor_unitario' => $request->valor_unitario, 'created_at' => now()];
+        $carrinho->produtos()->attach($request->produto_id, $pivotData);
 
-        /*
-        $pedido= new Pedido;
-        $pedido->user_id = $request->user_id;
-        $pedido->save();
-        $pedido->produtos()->attach($request->id, [ 'created_at' => now() ]);
-*/
-      //  return $pedido->id;
     }
+
+
 
 
     public function listAll($user_id){

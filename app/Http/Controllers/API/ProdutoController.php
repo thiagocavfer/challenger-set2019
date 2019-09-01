@@ -15,11 +15,28 @@ class ProdutoController extends Controller
 
 
     protected $repository;
-    
+
     public function __construct(IProduto $repository)
     {
         $this->repository = $repository;
     }
+
+
+
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function front()
+    {
+        $data = $this->repository->listAll();
+        return new ProdutosCollection($data);
+    }
+
 
 
     /**

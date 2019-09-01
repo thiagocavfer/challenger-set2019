@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'api_token'
     ];
 
     /**
@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->hasOne(Carrinho::class);
     }
 
-    
+
     public function roles()
     {
         return $this->belongsToMany(Roles::class);

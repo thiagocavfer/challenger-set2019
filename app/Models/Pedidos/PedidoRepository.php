@@ -11,24 +11,44 @@ class PedidoRepository implements IPedido{
 
     public function save(Request $request){
 
-        $pedido = new Pedido();
-        $pedido->user_id= $request->user_id;
-        $pedido->save();
-        $pedido_id = $pedido->id;
+        //
         $user= User::find($request->user_id);
-
-        foreach( $user->carrinho->produtos as $p){
-             $p->pivot->pedido_id = $pedido_id;
-             $p->pivot->save();
+        $pedido = new Pedido();
+        $pedido->user()->associate($user);
+        $pedido->save();
+        foreach($user->carrinho->produtos as $p){
+           //
+           $pivotData= ['quantidade' => $p->pivot->quantidade, 'valor_unitario' => $p->valor_unitario];
+           $pedido->produtos()->save($p, $pivotData);
         }
+        $user->pedidos()->save($pedido);
+        $user->carrinho->produtos()->detach();
 
     }
 
 
 
-    public function listAll(){
-      return  Pedido::with('user','produtos')->get();
+    public function listAll($user_id= ''){
+       if($user_id == ''){
+          return  Pedido::with('user','produtos')->get();
+        }else{
+        return Pedido::with('produtos')->where('user_id', '=', $user_id)->get();
+       }
     }
+
+
+
+    public function orderDetails(Pedido $pedido)
+    {
+        return [
+            'pedido' => $pedido,
+            'produtos'=> $pedido->produtos()->get(),
+        ];
+    }
+
+
+
+
 
 
 }
