@@ -8,14 +8,22 @@ export default class Medicines extends React.PureComponent {
   constructor () {
     super();
     this.state = {
-      items: null
+      items: null,
+      searchTerm: ''
     };
+    this.getItems = this.getItems.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.buildItems = this.buildItems.bind(this);
   }
 
   componentDidMount() {
+    this.getItems();
+  }
+
+  getItems(filter = null) {
     axios
-      .get('/api/medicamentos').then(response => {
+      .get(this.getUrl(filter))
+      .then(response => {
         this.setState({
           items: response.data
         });
@@ -23,6 +31,19 @@ export default class Medicines extends React.PureComponent {
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+  getUrl(filter) {
+    if (filter) {
+      return `/api/medicamentos?filtro=${filter}`;
+    }
+
+    return '/api/medicamentos';
+  }
+
+  handleSearch(searchTerm) {
+    this.getItems(searchTerm);
+    this.setState({ searchTerm: searchTerm });
   }
 
   buildItems(items) {
@@ -54,11 +75,13 @@ export default class Medicines extends React.PureComponent {
     return (
       <div className="container">
         <h2>Medicamentos</h2>
-        <SearchForm />
+        <SearchForm
+          searchTerm={this.state.searchTerm}
+          onSearchTermChange={this.handleSearch}
+        />
 
         {this.buildItems(this.state.items)}
       </div>
     );
-    
   }
 }
