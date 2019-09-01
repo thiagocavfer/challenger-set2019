@@ -1,7 +1,5 @@
 const mix = require('laravel-mix');
 
-require('laravel-mix-eslint-config');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -14,8 +12,17 @@ require('laravel-mix-eslint-config');
  */
 
 mix
-  .react('resources/js/app.js', 'public/js').eslint({
-    fix: false,
-    cache: false
+  .webpackConfig({
+    module: {
+      rules: [
+        {
+          enforce: 'pre',
+          test: /\.js$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/
+        }
+      ]
+    }
   })
+  .react('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css');
