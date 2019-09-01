@@ -23,6 +23,17 @@ class Pedidos extends Migration
             $table->timestamps();
         });
 
+
+        Schema::create('pedido_produto', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('pedido_id');
+            $table->unsignedBigInteger('produto_id');
+            $table->unsignedInteger('quantidade')->default(1);
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onUpdate('cascade')->onDelete('no action');
+            $table->foreign('produto_id')->references('id')->on('produtos')->onUpdate('cascade')->onDelete('no action');
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -33,6 +44,7 @@ class Pedidos extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('pedido_produto');
         Schema::dropIfExists('pedidos');
     }
 }

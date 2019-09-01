@@ -40,3 +40,4 @@ Route::prefix('produtos')->name('produtos.')->group(function(){
 
 
 
+Route::get('/front-page' , 'API\ProdutoController@index')->name('front');

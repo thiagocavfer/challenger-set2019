@@ -24,10 +24,9 @@ class Carrinho extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('carrinho_id');
             $table->unsignedBigInteger('produto_id');
-            $table->unsignedBigInteger('pedido_id')->nullable();
             $table->unsignedInteger('quantidade')->default(1);
-            $table->foreign('carrinho_id')->references('id')->on('carrinhos')->onDelete('cascade');
-            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
+            $table->foreign('carrinho_id')->references('id')->on('carrinhos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('produto_id')->references('id')->on('produtos')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
 

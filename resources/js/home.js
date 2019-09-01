@@ -5,11 +5,11 @@
  */
 
 
+window.frontPage = require('axios');
+
+window.frontPage.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-
-
-
-require('./bootstrap');
 
 /**
  * Next, we will create a fresh React component instance and attach it to
