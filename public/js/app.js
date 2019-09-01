@@ -94284,7 +94284,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Product).call(this));
     _this.state = {
-      produtosQt: 1
+      produtosQt: 1,
+      message: ''
     };
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     return _this;
@@ -94301,8 +94302,7 @@ function (_Component) {
         valor_unitario: produto.valor_unitario
       };
       axios.post('/api/carrinhos', data).then(function (res) {
-        var result = res.data.data;
-        alert(result.message);
+        alert('produto adicionado ao carrinho');
       })["catch"](function (err) {
         console.log(err);
       });
@@ -94313,6 +94313,7 @@ function (_Component) {
       var _this2 = this;
 
       var produtosQt = this.state.produtosQt;
+      var produto = this.props.produto;
 
       var counter = function counter(size) {
         var options = [];
@@ -94333,20 +94334,20 @@ function (_Component) {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
-      }, this.props.produto.nome), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, produto.nome), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].image,
-        src: "/images/".concat(this.props.produto.avatar)
+        src: "/images/".concat(produto.avatar)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "apresenta\xE7\xE3o: ", this.props.produto.apresentacao), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "apresenta\xE7\xE3o: ", produto.apresentacao), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "laboratorio: ", this.props.produto.laboratorio), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "laboratorio: ", produto.laboratorio), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "principio ativo: ", this.props.produto.principio_ativo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "principio ativo: ", produto.principio_ativo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "estoque inicial: ", this.props.produto.estoque_inicial), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "valor unit\xE1rio: ", Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(this.props.produto.valor_unitario))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "estoque inicial: ", produto.estoque_inicial), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "valor unit\xE1rio: ", Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(produto.valor_unitario))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row",
@@ -94357,7 +94358,7 @@ function (_Component) {
         className: "col-md-10 offset-md-1"
       }, this.state.produtosQt > 0 ? "unid.: ".concat(produtosQt) : "", " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-10 offset-md-1"
-      }, this.state.produtosQt > 0 ? "valor: ".concat(Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(produtosQt * this.props.produto.valor_unitario)) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.produtosQt > 0 ? "valor: ".concat(Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(produtosQt * produto.valor_unitario)) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-8"
@@ -94368,7 +94369,7 @@ function (_Component) {
           });
         },
         className: "form-control form-control-sm"
-      }, counter(this.props.produto.estoque_inicial))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, counter(produto.estoque_inicial))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.addToCart,
