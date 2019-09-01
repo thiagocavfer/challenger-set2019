@@ -15,8 +15,8 @@ class MedicineController extends Controller
             return new MedicineCollection(
                 Medicine::query()
                     ->where('nome', 'LIKE', "%{$filter}%")
-                    ->where('principio_ativo', 'LIKE', "%{$filter}%")
-                    ->where('laboratorio', 'LIKE', "%{$filter}%")
+                    ->orWhere('principio_ativo', 'LIKE', "%{$filter}%")
+                    ->orWhere('laboratorio', 'LIKE', "%{$filter}%")
                     ->get()
             );
         }
