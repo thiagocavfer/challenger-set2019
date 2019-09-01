@@ -94122,7 +94122,6 @@ function (_Component) {
     _this.state = {
       pedidos: []
     };
-    _this._isMounted = false;
     _this.listOrders = _this.listOrders.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -94143,13 +94142,7 @@ function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this._isMounted = true;
       this.listOrders("/api/pedidos?user_id=".concat(user.id));
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this._isMounted = false;
     }
   }, {
     key: "render",

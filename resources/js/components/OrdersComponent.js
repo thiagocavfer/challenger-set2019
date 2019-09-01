@@ -13,9 +13,6 @@ class OrdersComponent extends Component {
         this.state = {
             pedidos:[]
         }
-
-        this._isMounted = false;
-
         this.listOrders = this.listOrders.bind(this)
     }
 
@@ -31,13 +28,9 @@ class OrdersComponent extends Component {
 
 
     componentDidMount() {
-        this._isMounted = true;
         this.listOrders(`/api/pedidos?user_id=${user.id}`)
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
 
 
 
