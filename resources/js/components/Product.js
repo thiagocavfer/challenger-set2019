@@ -20,10 +20,14 @@ class Product extends Component {
 
 
     addToCart(){
-        let request = this.props.produto
-        request.user_id = user.id
-        request.unid = this.state.produtosQt
-        axios.post('/api/carrinhos', request)
+        let produto = this.props.produto
+        const data = {
+           produto_id: produto.id,
+           user_id : user.id,
+           unid: this.state.produtosQt,
+           valor_unitario: produto.valor_unitario
+        }
+        axios.post('/api/carrinhos', data)
           .then(res => {
               let result= res.data.data
                alert(result.message)

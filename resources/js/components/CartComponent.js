@@ -10,34 +10,26 @@ class CartComponent extends Component {
 
     constructor() {
         super()
-
         this.state = {
             produtos:[]
         }
-
         this.concluir = this.concluir.bind(this)
+
     }
+
 
 
 
    concluir(){
 
-        let form = new FormData()
-        this.state.produtos.forEach(p => {
-            form.append('produtos[]', p.id)
-            
-        })
-
-        form.append('user_id', user.id)
-
-        axios.post('/api/pedidos', form)
+       axios.post('/api/pedidos', { user_id: user.id})
           .then(res => {
                alert(res.data.data.message)
           })
-           .catch(err => {
+        .catch(err => {
               console.log(err)
-           })
-
+        })
+        this.props.action()
    }
 
 
@@ -47,6 +39,7 @@ class CartComponent extends Component {
     render() {
         const produtos = this.props.produtos
         const carrinho = this.props.carrinho
+        const action = this.props.action
         let valorTotal = 0;
         let quantidade = 0;
 
@@ -68,7 +61,7 @@ class CartComponent extends Component {
                                     <ul className="list-group" >
                                     {produtos.map(produto => (
                                            <li className="list-group-item" key={produto.id}>
-                                               <CartProductComponent produto={produto} carrinho={carrinho} />
+                                               <CartProductComponent  action={action}  produto={produto} carrinho={carrinho} />
                                            </li>
                                         ))}
                                       </ul>

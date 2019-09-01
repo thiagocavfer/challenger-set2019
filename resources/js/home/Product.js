@@ -20,12 +20,7 @@ class Product extends Component {
 
 
     addToCart(){
-        let request = this.props.produto
-        request.user_id = user.id
-        request.unid = this.state.produtosQt
-
         window.alert('faça login para adcionar ao carrinho!')
-
     }
 
 

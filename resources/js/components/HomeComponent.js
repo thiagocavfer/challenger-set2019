@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { formatCurrency } from '../formatter'
 import style from './style'
 import CartComponent from './CartComponent'
+import OrdersComponent from './OrdersComponent'
 
 
 class HomeComponent extends Component {
@@ -14,12 +15,22 @@ class HomeComponent extends Component {
             produtos: [],
             carrinho: {}
         }
+        this.refresh = this.refresh.bind(this)
     }
 
 
-   async componentDidMount() {
+    componentDidMount() {
+        this.loadData(`/api/carrinhos?user_id=${user.id}`)
+    }
 
-      await axios.get(`/api/carrinhos?user_id=${user.id}`)
+
+    refresh(){
+        this.loadData(`/api/carrinhos?user_id=${user.id}`)
+    }
+
+    
+    loadData(url){
+        axios.get(url)
             .then((res) => {
                 let produtos = res.data.data.produtos
                 let carrinho = res.data.data.carrinho
@@ -31,15 +42,19 @@ class HomeComponent extends Component {
             })
     }
 
-
     render() {
         const produtos = this.state.produtos
         const carrinho = this.state.carrinho
+        const action = this.refresh
         return (
-            <div>
-
-                <CartComponent produtos={produtos} carrinho={carrinho} />
-
+            <div className='container-fluid'>
+                <div className='row'>
+                   <CartComponent  action={action} produtos={produtos} carrinho={carrinho} />
+                </div>
+                <br /><hr /><br />
+                <div className='row'>
+                  <OrdersComponent />
+                </div>
             </div>
         )
     }

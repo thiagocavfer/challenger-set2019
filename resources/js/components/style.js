@@ -12,7 +12,16 @@ const style = {
         padding: 18,
         margin: 'auto',
         borderRadius: 30,
-        border: '1px  #222d32'
+        border: '1px  #222d32',
+        orderDetails:{
+            width: 100,
+            height: 80,
+            padding: 9,
+            margin: 'auto',
+            borderRadius: 30,
+            border: '1px  #222d32',
+        }
+
     },
     cart:{
         image: {

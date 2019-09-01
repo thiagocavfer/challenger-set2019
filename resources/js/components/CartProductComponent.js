@@ -19,10 +19,9 @@ class CartComponent extends Component {
 
         await axios.delete(`/api/carrinhos/${carrinho_id}?produto_id=${product_id}`)
             .then(res => {
-               window.location.href= '/home'
-            })
-            .catch((err) => { console.log(err) })
+            }).catch((err) => { console.log(err) })
 
+         this.props.action();
     }
 
 

@@ -3,6 +3,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import Products from './Products'
 import style from './style'
 
+
 class ProductsComponent extends Component {
     constructor() {
         super()
@@ -61,7 +62,7 @@ class ProductsComponent extends Component {
     }
 
     listAll() {
-       this.GetProdutos('/api/produtos')
+       this.GetProdutos('/api/front-page')
     }
 
     allOrderAscPreco(){
@@ -99,7 +100,7 @@ class ProductsComponent extends Component {
     }
 
     GetProdutos(url) {
-        axios.get(url).then(res => {
+        frontPage.get(url).then(res => {
             //carrega os remedios a serem a exibidos nos cards
             let produtos = res.data.data
             this.setState({ produtos })
@@ -141,7 +142,7 @@ class ProductsComponent extends Component {
                                     this.setState({ searchParam: selected });
                                     this.search(selected)
                                 } }
-                               
+
                                 options={keyWords} />
 
                                <button className="btn btn-primary" onClick={this.forceUpdateHandler}><i className='fas fa-sync'></i> Recarregar</button>
