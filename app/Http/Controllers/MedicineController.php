@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Medicine;
 use App\Http\Resources\MedicineCollection;
 
