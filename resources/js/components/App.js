@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Medicines from './Medicines';
 
 export default class App extends React.Component {
   render() {
     return (
-      <h1>Olá, Mundo!</h1>
+      <Medicines />
     );
   }
 }
