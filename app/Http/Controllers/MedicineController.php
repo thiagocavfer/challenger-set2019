@@ -9,18 +9,22 @@ use App\Http\Resources\MedicineCollection;
 class MedicineController extends Controller
 {
     public function show(Request $request) {
-        if($request->query('filtro')) {
-            $filter = $request->query('filtro');
+        $query = Medicine::query();
 
-            return new MedicineCollection(
-                Medicine::query()
-                    ->where('nome', 'LIKE', "%{$filter}%")
-                    ->orWhere('principio_ativo', 'LIKE', "%{$filter}%")
-                    ->orWhere('laboratorio', 'LIKE', "%{$filter}%")
-                    ->get()
-            );
+        if($filter = $request->query('filtro')) {
+            $query = $query
+                ->where('nome', 'LIKE', "%{$filter}%")
+                ->orWhere('principio_ativo', 'LIKE', "%{$filter}%")
+                ->orWhere('laboratorio', 'LIKE', "%{$filter}%");
         }
 
-        return new MedicineCollection(Medicine::all());
+        if(($orderBy = $request->query('ordenar_por'))
+            && ($orderBy == 'nome' || $orderBy == 'valor_unitario')
+        ) {
+            $direction = ($request->query('direção') == 'desc') ? 'desc': 'asc';
+            $query = $query->orderBy($orderBy, $direction);
+        }
+
+        return new MedicineCollection($query->get());
     }
 }
