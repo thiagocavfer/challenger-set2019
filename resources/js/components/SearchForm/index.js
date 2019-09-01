@@ -4,10 +4,19 @@ export default class SearchForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.emitChangeDebounced = _.debounce(this.emitChange, 250);
+  }
+
+  componentWillUnmount() {
+    this.emitChangeDebounced.cancel();
+  }
+
+  emitChange(value) {
+    this.props.onSearchTermChange(value);
   }
 
   handleChange(event) {
-    this.props.onSearchTermChange(event.target.value);
+    this.emitChangeDebounced(event.target.value);
   }
 
   handleSubmit() {
@@ -22,7 +31,7 @@ export default class SearchForm extends React.PureComponent {
             className="form-control"
             placeholder="Buscar pelo nome do medicamento, princípio ativo ou nome do laboratório"
             aria-label="Buscar pelo nome do medicamento, princípio ativo ou nome do laboratório"
-            value={this.props.searchTerm}
+            defaultValue={this.props.searchTerm}
             onChange={this.handleChange}
           />
         </div>
