@@ -29,6 +29,7 @@ class Pedidos extends Migration
             $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('produto_id');
             $table->unsignedInteger('quantidade')->default(1);
+            $table->decimal('valor_unitario', 9, 2);
             $table->foreign('pedido_id')->references('id')->on('pedidos')->onUpdate('cascade')->onDelete('no action');
             $table->foreign('produto_id')->references('id')->on('produtos')->onUpdate('cascade')->onDelete('no action');
             $table->timestamps();
