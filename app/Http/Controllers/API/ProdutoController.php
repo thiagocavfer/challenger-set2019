@@ -15,8 +15,7 @@ class ProdutoController extends Controller
 
 
     protected $repository;
-
-
+    
     public function __construct(IProduto $repository)
     {
         $this->repository = $repository;
@@ -44,7 +43,7 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -75,7 +74,7 @@ class ProdutoController extends Controller
 
 
 
-    
+
     /**
      * Remove the specified resource from storage.
      *

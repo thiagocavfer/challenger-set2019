@@ -3,9 +3,12 @@
 namespace App;
 
 use App\Models\Pedidos\Pedido;
+use App\Models\Pedidos\Carrinho;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
+
 
 class User extends Authenticatable
 {
@@ -41,11 +44,16 @@ class User extends Authenticatable
 
 
 
-     public function pedidos(){
+    public function pedidos(){
          return $this->hasMany(Pedido::class);
-     }
+    }
 
 
+    public function carrinho(){
+        return $this->hasOne(Carrinho::class);
+    }
+
+    
     public function roles()
     {
         return $this->belongsToMany(Roles::class);

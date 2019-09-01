@@ -12,8 +12,9 @@
 */
 
 
-
+Route::view('/', 'welcome');
 
 Auth::routes();
+
 
 Route::view('/{path?}', 'home');

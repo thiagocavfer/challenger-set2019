@@ -14,17 +14,20 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+
     return $request->user();
+
 });
 
 //
-$routes= [
+$routes = [
     '/produtos' => 'API\ProdutoController',
     '/pedidos' => 'API\PedidoController',
+    '/carrinhos' => 'API\CarrinhoController',
 ];
 
 //
-Route::resources($routes);
+Route::apiResources($routes);
 
 
 //

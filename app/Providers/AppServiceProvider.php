@@ -6,6 +6,12 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Models\Produtos\IProduto;
 use App\Models\Produtos\ProdutoRepository;
+use App\Models\Pedidos\IPedido;
+use App\Models\Pedidos\PedidoRepository;
+use App\Models\Pedidos\ICarrinho;
+use App\Models\Pedidos\CarrinhoRepository;
+
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->app->bind(IProduto::class, ProdutoRepository::class);
+        $this->app->bind(IPedido::class, PedidoRepository::class);
+        $this->app->bind(ICarrinho::class, CarrinhoRepository::class);
     }
 
     /**

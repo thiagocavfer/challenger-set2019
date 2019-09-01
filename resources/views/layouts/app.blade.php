@@ -23,12 +23,20 @@
 
 <body>
     <div>
-    @include('layouts.app-nav')
+        @include('layouts.app-nav')
 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    @auth
+    <script>
+        sessionStorage.setItem('api_key', '{{Auth::user()->api_token}}');
+        sessionStorage.setItem('user_id', '{{Auth::user()->id}}');
+    </script>
+    @endauth
+
 </body>
 
 </html>

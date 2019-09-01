@@ -3,12 +3,14 @@
 namespace App\Models\Pedidos;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Produtos\Produto;
 use App\User;
+use App\Models\Produtos\Produto;
 
-class Pedido extends Model
+class Carrinho extends Model
 {
     //
+
+
 
 
     public function user()
@@ -16,9 +18,11 @@ class Pedido extends Model
         return $this->belongsTo(User::class);
     }
 
-    
-    public function produtos(){
-       return $this->belongsToMany(Produto::class);
+
+
+    public function produtos()
+    {
+        return $this->belongsToMany(Produto::class)->withPivot('quantidade');
     }
 
 

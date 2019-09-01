@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -32,6 +33,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('carrinho_produto');
+        Schema::dropIfExists('carrinhos');
         Schema::dropIfExists('users');
     }
 }

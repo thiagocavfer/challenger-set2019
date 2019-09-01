@@ -11,29 +11,36 @@ class CartComponent extends Component {
     constructor() {
         super()
 
-        this.state = {}
+        this.state = {
+            produtos:[]
+        }
 
-        this.concluir = this.concluir.bind()
+        this.concluir = this.concluir.bind(this)
     }
 
 
 
-    concluir(){
+   concluir(){
 
         let form = new FormData()
-
-        produtos.forEach(p => {
-            form.append('produto[]', p.id)
+        this.state.produtos.forEach(p => {
+            form.append('produtos[]', p.id)
+            
         })
+
+        form.append('user_id', user.id)
 
         axios.post('/api/pedidos', form)
           .then(res => {
-               alert(res.data)
+               alert(res.data.data.message)
           })
            .catch(err => {
               console.log(err)
            })
-    }
+
+   }
+
+
 
 
 
@@ -76,7 +83,7 @@ class CartComponent extends Component {
                                    <div className='row'>
                                        <div className='col-md-6 offset-md-3 text-center'>{quantidade > 0?
                                              <button onClick={this.concluir} className='btn btn-outline-primary btn-block' >
-                                                 Concluir Pedido
+                                               Concluir Pedido
                                              </button>
                                         : <p> CARRRINHO VAZIO </p>}
 

@@ -93686,9 +93686,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -93711,8 +93711,10 @@ function (_Component) {
     _classCallCheck(this, CartComponent);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CartComponent).call(this));
-    _this.state = {};
-    _this.concluir = _this.concluir.bind();
+    _this.state = {
+      produtos: []
+    };
+    _this.concluir = _this.concluir.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -93720,11 +93722,12 @@ function (_Component) {
     key: "concluir",
     value: function concluir() {
       var form = new FormData();
-      produtos.forEach(function (p) {
-        form.append('produto[]', p.id);
+      this.state.produtos.forEach(function (p) {
+        form.append('produtos[]', p.id);
       });
+      form.append('user_id', user.id);
       axios.post('/api/pedidos', form).then(function (res) {
-        alert(res.data);
+        alert(res.data.data.message);
       })["catch"](function (err) {
         console.log(err);
       });

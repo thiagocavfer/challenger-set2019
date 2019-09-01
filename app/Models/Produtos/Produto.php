@@ -4,7 +4,7 @@ namespace App\Models\Produtos;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pedidos\Pedido;
-
+use App\Models\Pedidos\Carrinho;
 
 
 class Produto extends Model
@@ -31,6 +31,11 @@ class Produto extends Model
    }
 
 
+
+    public function carrinhos()
+    {
+        return $this->belongsToMany(Carrinho::class);
+    }
 
 
 }
