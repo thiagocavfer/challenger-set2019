@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', 'MedicineController@show');
+Route::get('/medicamentos', 'MedicineController@show');
