@@ -14,3 +14,4 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/medicamentos', 'MedicineController@show');
+Route::post('/reservar', 'OrderController@create');
