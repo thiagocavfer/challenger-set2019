@@ -16,11 +16,30 @@ export default function Medicine(props) {
           <br/>
           <small className="text-muted">{props.subheading}</small>
         </h3>
-        <p className="card-text">
-          {props.text}
-        </p>
+        <p>{props.text}</p>
+        <span>R$ {props.price}</span>
       </div>
-      <div className="card-footer"></div>
+      <div className="card-footer">
+        <div className="input-group">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Quantidade"
+            aria-label="Quantidade"
+            aria-describedby="add-button"
+          />
+          <div className="input-group-append">
+            <button
+              className="btn btn-primary"
+              type="button"
+              id="add-button"
+            >
+              +
+              <span className="sr-only">Reservar</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
