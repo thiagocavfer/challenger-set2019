@@ -110,17 +110,16 @@ export default class Medicines extends React.PureComponent {
 
   render() {
     return (
-      <div className="container">
-        <h2>Medicamentos</h2>
+      <main className="container">
+        <h1>Medicamentos</h1>
         <FilterForm
           searchTerm={this.state.searchTerm}
           onSearchTermChange={this.handleSearch}
           onOrderByChange={this.handleOrderBy}
           onDirectionChange={this.handleDirection}
         />
-
         {this.buildItems(this.state.items)}
-      </div>
+      </main>
     );
   }
 }

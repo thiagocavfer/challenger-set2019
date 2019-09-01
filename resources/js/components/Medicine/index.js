@@ -11,11 +11,11 @@ export default function Medicine(props) {
         />
       }
       <div className="card-body">
-        <h3 className="card-title">
+        <h2 className="h3 card-title">
           {props.heading}
           <br/>
           <small className="text-muted">{props.subheading}</small>
-        </h3>
+        </h2>
         <p>{props.text}</p>
         <span>R$ {props.price}</span>
       </div>
