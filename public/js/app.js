@@ -93729,8 +93729,7 @@ function (_Component) {
         var url = window.URL.createObjectURL(new Blob([res.data]));
         var link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'pedido.pdf'); //or any other extension
-
+        link.setAttribute('download', 'pedido.pdf');
         document.body.appendChild(link);
         link.click();
       })["catch"](function (err) {
@@ -94162,8 +94161,7 @@ function (_Component) {
         var url = window.URL.createObjectURL(new Blob([res.data]));
         var link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'pedido.pdf'); //or any other extension
-
+        link.setAttribute('download', 'pedido.pdf');
         document.body.appendChild(link);
         link.click();
       });

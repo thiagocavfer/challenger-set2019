@@ -26,7 +26,7 @@ class CartComponent extends Component {
               const url = window.URL.createObjectURL(new Blob([res.data]));
               const link = document.createElement('a');
               link.href = url;
-              link.setAttribute('download', 'pedido.pdf'); //or any other extension
+              link.setAttribute('download', 'pedido.pdf'); 
               document.body.appendChild(link);
               link.click();
           })
