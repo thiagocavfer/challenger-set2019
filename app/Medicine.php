@@ -16,7 +16,7 @@ class Medicine extends Model
     {
         $fileFormats = ['.jpg', '.png'];
         foreach($fileFormats as $fileFormat) {
-            if(Storage::disk('local')->exists($this->ggrem . $fileFormat)) {
+            if(Storage::disk('public')->exists($this->ggrem . $fileFormat)) {
                 return $this->ggrem . $fileFormat;
             }
         }
