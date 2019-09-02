@@ -8,10 +8,10 @@ export default function Header() {
         <div className="container">
           <Link to="/" className="navbar-brand">CDTS</Link>
           <ul className="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li className="nav-item active">
               <Link to="/" className="nav-link">Medicamentos</Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/reservas/" className="nav-link">Reservas</Link>
             </li>
           </ul>

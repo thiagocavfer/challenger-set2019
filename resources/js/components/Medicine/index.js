@@ -55,8 +55,6 @@ export default class FilterForm extends React.PureComponent {
   }
 
   render() {
-    const disabled = this.state.disabled ? 'disabled' : null;
-
     return (
       <div className="card">
         { this.props.image && 
