@@ -56,12 +56,12 @@ export default class FilterForm extends React.PureComponent {
 
   render() {
     return (
-      <div className="card">
+      <div className="card mb-4">
         { this.props.image && 
           <img
             src={`/storage/${this.props.image}`}
             alt=""
-            className="img-fluid"
+            className="card-img-top"
           />
         }
         <div className="card-body">
@@ -71,7 +71,7 @@ export default class FilterForm extends React.PureComponent {
             <small className="text-muted">{this.props.subheading}</small>
           </h2>
           <p>{this.props.text}</p>
-          <span>R$ {this.props.price}</span>
+          <span className="h4">R$ <span className="text-primary">{this.props.price}</span></span>
         </div>
         <div className="card-footer">
           <form onSubmit={this.handleSubmit}>

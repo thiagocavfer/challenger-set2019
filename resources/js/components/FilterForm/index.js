@@ -51,10 +51,10 @@ export default class FilterForm extends React.PureComponent {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="search-input">
-            Buscar por nome, princípio ativo ou laboratório
+      <form className="form-inline justify-content-sm-end" onSubmit={this.handleSubmit}>
+        <div className="form-group mr-lg-2 mr-sm-0 mr-3 mb-lg-0 mb-md-2 mb-sm-2">
+          <label htmlFor="search-input" className="mr-sm-2">
+            Buscar
           </label>
           <input
             type="search"
@@ -66,7 +66,9 @@ export default class FilterForm extends React.PureComponent {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="order-select">Ordenar por</label>
+          <label htmlFor="order-select" className="mr-sm-2">
+            Ordenar por
+          </label>
           <select
             className="form-control"
             id="order-select"
