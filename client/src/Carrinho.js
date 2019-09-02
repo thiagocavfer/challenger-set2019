@@ -1,0 +1,25 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+class Carrinho extends Component{
+
+    render(){
+        return (
+          <div className="App">
+              <nav className="navbar navbar-dark bg-dark">
+                    <Link to="/" className="navbar-brand">Shopping</Link>
+                    <ul className="nav justify-content-end">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Pedido</Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/cart" className="nav-link">Carrinho</Link>
+                        </li>
+                    </ul>
+              </nav> 
+        </div>
+        );
+    }
+}
+
+export default Carrinho;
