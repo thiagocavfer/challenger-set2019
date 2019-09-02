@@ -17,7 +17,15 @@ DB_USERNAME= usuario
 DB_PASSWORD= senha
 ```
 
-o projeto faz uso de libraries que necessitam da extensão php-gd instalada na máquina
+o projeto faz uso de libraries que necessitam da extensão php-gd instalada na máquina,
+
+ fiz uso da librarie mpdf para gerar o arquivo pdf, por ser flexivel, pratica eficiente para atender as necessidades
+
+ para o front-end utilizei o axios para as requisições as end points, por já vir por padrão no laravel
+e ser eficiente para atender as necessidades do projeto
+e utilizei o component 'react-bootstrap-typeahead' para melhorar a experiencia de uso no campo de busca.
+
+
 
 para instalar no linux:
 
