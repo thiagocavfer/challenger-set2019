@@ -18,7 +18,7 @@ Tentei fazer uso dos padrões do Laravel e do React o tanto quanto possível, e 
 
 ## Coisas que faria se tivesse mais tempo
 
-- Terminar o desafio, claro. Melhorar a funcionalidade de reservas e fazer alguns ajustes finos.
+- Terminar o desafio, claro. Finalizar a funcionalidade de reservas, fazer alguns ajustes, dar uma revisada.
 - Testes! Infelizmente, não consegui fazer nenhum.
 - Melhorar os estilos. O layout e design estão bem básicos, especialmente no PDF.
 - Mesclar duplicados no `localStorage`: desenvolver uma lógica que procurasse se o medicamento já foi adicionado à reserva guardada no `localStorage` do navegador e só somasse as suas quantidades ao invés de adicionar o mesmo medicamento diversas vezes.
