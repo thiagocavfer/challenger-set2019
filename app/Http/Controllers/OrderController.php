@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App;
 use App\Order;
 use App\OrderMedicines;
 
@@ -22,6 +23,16 @@ class OrderController extends Controller
             ]);
         }
 
-        return response('OK!!!', 200);
+        return $this->getPdf($order, $medicines);
+    }
+
+    private function getPdf($order, $medicines) {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('order', [
+            'codigo' => $order->codigo,
+            'medicines' => $medicines
+        ]);
+
+        return $pdf->stream();
     }
 }
