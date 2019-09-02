@@ -9,8 +9,7 @@ use App\OrderMedicines;
 class OrderController extends Controller
 {
     public function create(Request $request) {
-        $data = $request->input('data');
-        $medicines = $data['medicamentos'];
+        $medicines = $request->input('medicamentos');
 
         $order = Order::create();
         foreach($medicines as $medicine) {
