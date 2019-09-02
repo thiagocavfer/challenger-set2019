@@ -17,9 +17,14 @@ A aplicação foi criada usando docker, assim, não há necessidade de instalar 
 `docker exec -it php php artisan db:seed`
 
 3 - Para testar a aplicação server (API), apontar para:
+
 `http://localhost/medicamentos` para listar todos os medicamentos
+
 `http://localhost/medicamentos/{id}` para listar um medicamento
+
 `http://localhost/medicamentos/search/{term}` para pesquisar medicamentos
 
+
 4 - Para testar a aplicação client, acessar:
+
 `http://localhost:3000`	  
