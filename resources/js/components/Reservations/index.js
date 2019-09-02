@@ -36,7 +36,7 @@ export default class Reservations extends React.PureComponent {
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', `pedido-de-reservas-${new Date().getTime()}.pdf`);
-        link.click();
+        link.dispatchEvent(new MouseEvent('click'));
         window.URL.revokeObjectURL(url);
         // localStorage.clear();
         // this.getItems();
