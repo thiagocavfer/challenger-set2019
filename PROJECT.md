@@ -14,12 +14,13 @@ Tentei fazer uso dos padrões do Laravel e do React o tanto quanto possível, e 
 
 - `eslint` e plugins: adicionar algumas regras para consistência e boas práticas no código do front-end.
 - `react-router-dom`: uma boa e provavelmente a mais popular solução para declaração de rotas no React.
+- `barryvdh/laravel-dompdf`: um wrapper da biblioteca `dompdf` para o Laravel. Uma boa biblioteca para converter HTML em PDF.
 
 ## Coisas que faria se tivesse mais tempo
 
-- Terminar o desafio, claro. Finalizar a funcionalidade de reservas, realizar a requisição POST para persistí-la e gerar o PDF.
-- Testes! Infelizmente, não consegui fazer nenhum. :(
-- Melhorar os estilos. O layout e design estão bem básicos.
+- Terminar o desafio, claro. Melhorar a funcionalidade de reservas e fazer alguns ajustes finos.
+- Testes! Infelizmente, não consegui fazer nenhum.
+- Melhorar os estilos. O layout e design estão bem básicos, especialmente no PDF.
 - Mesclar duplicados no `localStorage`: desenvolver uma lógica que procurasse se o medicamento já foi adicionado à reserva guardada no `localStorage` do navegador e só somasse as suas quantidades ao invés de adicionar o mesmo medicamento diversas vezes.
 - React Context: Acho que seria interessante desenvolver um mínimo sistema de notificações utilizando React Context e os Toasts do Bootstrap.
 - PhpSpreadSheet: A solução utilizando `.csv` é eficaz, mas talvez fuja um pouco do que vocês queriam. Com mais tempo, implementaria a biblioteca PhpSpreadSheet para gerar os seeders direto do `.xlsx`.
