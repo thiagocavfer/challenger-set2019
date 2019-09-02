@@ -18,10 +18,10 @@ Tentei fazer uso dos padrões do Laravel e do React o tanto quanto possível, e 
 
 ## Coisas que faria se tivesse mais tempo
 
-- Terminar o desafio, claro. Finalizar a funcionalidade de reservas, fazer alguns ajustes, dar uma revisada.
+- Terminar o desafio, claro. Finalizar a funcionalidade de reservas, adicionar a remoção de medicamentos, mostrar todas as informações no PDF; fazer alguns ajustes -- a parte de reservas está um pouco frágil porque está dependente de mais do cliente, realizando algumas funções que talvez devessem ser delegadas ao servidor; e dar uma revisada.
 - Testes! Infelizmente, não consegui fazer nenhum.
 - Melhorar os estilos. O layout e design estão bem básicos, especialmente no PDF.
-- Mesclar duplicados no `localStorage`: desenvolver uma lógica que procurasse se o medicamento já foi adicionado à reserva guardada no `localStorage` do navegador e só somasse as suas quantidades ao invés de adicionar o mesmo medicamento diversas vezes.
+- Mesclar duplicados no `localStorage`: desenvolver uma lógica que procurasse se o medicamento já foi adicionado à reserva guardada no `localStorage` do navegador e só somasse as suas quantidades ao invés de adicionar o mesmo medicamento diversas vezes. Como disse no primeiro item da lista, a parte de reservas (que faz uso do localStorage) está um pouco frágil por depender de mais do cliente, mas parte disso se deve ao fato de as reservas serem realizadas por usuários não autenticados. Talvez delegar essa tarefa ao servidor seja a solução para esse problema também.
 - React Context: Acho que seria interessante desenvolver um mínimo sistema de notificações utilizando React Context e os Toasts do Bootstrap.
 - PhpSpreadSheet: A solução utilizando `.csv` é eficaz, mas talvez fuja um pouco do que vocês queriam. Com mais tempo, implementaria a biblioteca PhpSpreadSheet para gerar os seeders direto do `.xlsx`.
 - PHP_CodeSniffer no projeto: O ESLint está rodando como uma dependência do projeto, mas o PHP_CodeSniffer roda globalmente. Para manter uma consistência, e também para devida utilização da biblioteca, eu faria com que o PHP_CodeSniffer também rodasse como uma dependência.
