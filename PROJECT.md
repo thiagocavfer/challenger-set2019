@@ -32,7 +32,8 @@ para instalar no linux:
 $ sudo apt install php-gd
 
 
-após isso basta instalar as dependencias via composer
+após isso basta instalar as dependencias via composer na pasta do projeto:
+
 $ composer install
  
 e as dependencias do front-end React 
