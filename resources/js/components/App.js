@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
 import Medicines from './Medicines';
 import Reservations from './Reservations';
+import Footer from './Footer';
 
 export default class App extends React.PureComponent {
   render() {
@@ -13,6 +14,7 @@ export default class App extends React.PureComponent {
           <Header />
           <Route path="/" exact component={Medicines} />
           <Route path="/reservas/" component={Reservations} />
+          <Footer />
         </React.Fragment>
       </BrowserRouter>
     );
