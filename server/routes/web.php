@@ -14,13 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::prefix('medicamentos')->group(function () {
-    Route::get('/', 'MedicamentosController@index');
-    Route::get('/{id}', 'MedicamentosController@show');
-    Route::get('/search/{term}', 'MedicamentosController@search');
-});
-
-Route::prefix('pedidos')->group(function () {
-	Route::post('/', 'PedidoController@store');
-});

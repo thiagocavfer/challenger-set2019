@@ -24,7 +24,7 @@ class SearchBox extends Component{
   	}
 
     handleSubmit(event) {
-    	var url = `http://localhost/medicamentos/search/${this.state.value}`;
+    	var url = `http://localhost/api/medicamentos/search/${this.state.value}`;
 		this.props.search(url)
 	    event.preventDefault()
 	}

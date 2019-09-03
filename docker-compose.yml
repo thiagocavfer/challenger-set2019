@@ -14,15 +14,16 @@ services:
       - "443:443"
     networks:
       desafio:
-        ipv4_address: 10.11.0.2  
+        ipv4_address: 10.11.0.2
 
   mariadb:
     image: mariadb
     container_name: mariadb
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=mypass
-      - MYSQL_DATABASE=desafio
+    env_file:
+      - mariadb.env
+    volumes:
+      - ./sql:/sql
     ports:
       - "3306:3306"
     networks:

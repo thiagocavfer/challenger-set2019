@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import '../css/ResultItem.css'
 import { connect } from 'react-redux'
 import { addToCart } from '../actions/CartActions'
+import { formatMoeda } from '../utils';
+import { show, hide } from '../actions/AlertActions'
 
 class ResultItem extends Component{
 
@@ -28,6 +30,7 @@ class ResultItem extends Component{
     		quantidade: this.state.selectValue
     	}
     	this.props.addToCart(data)
+    	this.props.show('O item foi adicionado ao Carrinho')
     	event.preventDefault()
 	}
 
@@ -55,7 +58,7 @@ class ResultItem extends Component{
 				    		</tr>
 				    		<tr>
 				    			<th>Valor Unitário</th>
-				    			<td>{this.props.valor_unitario}</td>
+				    			<td>{formatMoeda(this.props.valor_unitario)}</td>
 				    		</tr>
 				    		</tbody>
 				    	</table>
@@ -78,4 +81,4 @@ class ResultItem extends Component{
     }
 }
 
-export default connect(null, {addToCart}) (ResultItem);
+export default connect(null, { addToCart, show, hide }) (ResultItem);

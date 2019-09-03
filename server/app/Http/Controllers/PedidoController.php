@@ -19,16 +19,16 @@ class PedidoController extends Controller
         $dadosPedido = $request->all();
         $totalItens = 0;
         $valorTotal = 0;
-        if (count($dadosPedido['item']) > 0) {
+        if (count($dadosPedido['itens']) > 0) {
             DB::beginTransaction(); 
             try{
                $pedido->save();
-               foreach ($dadosPedido['item'] as $item) {
+               foreach ($dadosPedido['itens'] as $item) {
                     $totalItens ++;
                     $itemPedido = new ItemPedido($item);
                     Pedido::find($pedido->id)->itens()->save($itemPedido);
                     $valorTotal += $itemPedido->medicamento->valor_unitario;
-               }         
+               }
             }
             catch(\Exception $e)
             {

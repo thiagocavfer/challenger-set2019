@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('medicamentos')->group(function () {
+    Route::get('/', 'MedicamentosController@index');
+    Route::get('/{id}', 'MedicamentosController@show');
+    Route::get('/search/{term}', 'MedicamentosController@search');
+});
+
+Route::prefix('pedidos')->group(function () {
+	Route::post('/', 'PedidoController@store');
+});

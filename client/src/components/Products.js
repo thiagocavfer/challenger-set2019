@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SearchBox from './SearchBox.js';
 import Results from './Results.js';
+import Alert from './Alert';
+import { connect } from 'react-redux'
+import { hide } from '../actions/AlertActions'
+
 
 class Products extends Component{
 
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	searchResults: []
+	    	searchResults: [],
 		}
 		this.search = this.search.bind(this);
     }
@@ -31,12 +35,19 @@ class Products extends Component{
         		<h2>Busca</h2>
                 <SearchBox search={this.search} />
                 <br/>
+                <Alert onPress={() => this.props.hide()} visible={this.props.alert.visible} text={this.props.alert.text} />
                 <div className="clear">
-                	<Results searchResults={this.state.searchResults}/>
+                	<Results searchResults={this.state.searchResults} />
                 </div>
             </div>
         );
     }
 }
 
-export default Products;
+const mapStateToProps = (state) => {
+    return {
+        alert: state.alert
+    }
+}
+
+export default connect(mapStateToProps, { hide }) (Products)

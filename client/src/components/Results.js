@@ -10,19 +10,15 @@ class Results extends Component{
     						   avatar={medicamento.avatar}
     						   laboratorio={medicamento.laboratorio}
     						   apresentacao={medicamento.apresentacao}
-    						   valor_unitario={this.formatMoeda(medicamento.valor_unitario)}
+    						   valor_unitario={medicamento.valor_unitario}
     						   dropdown_options={this.getOptions(medicamento.estoque_inicial)}
     						   />
     	}.bind(this))
         return(
             <div className="row">
                 {resultItems}
-            </div>           
+            </div>
         );
-    }
-
-    formatMoeda(value) {
-    	return 'R$ ' + value.toFixed(2).replace('.', ',');
     }
 
     getOptions(max) {

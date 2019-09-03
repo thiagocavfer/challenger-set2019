@@ -1,2 +1,3 @@
 server/.env
+cerver/vendor/**
 client/node_modules/**
