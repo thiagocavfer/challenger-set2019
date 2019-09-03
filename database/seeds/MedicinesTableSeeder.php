@@ -17,7 +17,7 @@ class MedicinesTableSeeder extends Seeder
         $medicines = $this->getMedicines();
         $table = DB::table('medicines');
 
-        foreach($medicines as $medicine) {
+        foreach ($medicines as $medicine) {
             $table->insert([
                 'ggrem' => $medicine['GGREM'],
                 'principio_ativo' => $medicine['PRINCÍPIO ATIVO'],
@@ -43,7 +43,7 @@ class MedicinesTableSeeder extends Seeder
         $rows = array_map('str_getcsv', file($file));
         $header = array_shift($rows);
         $medicines = [];
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $medicines[] = array_combine($header, $row);
         }
 

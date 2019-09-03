@@ -15,8 +15,8 @@ class Medicine extends Model
     public function getAvatarAttribute() : string
     {
         $fileFormats = ['.jpg', '.png'];
-        foreach($fileFormats as $fileFormat) {
-            if(Storage::disk('public')->exists($this->ggrem . $fileFormat)) {
+        foreach ($fileFormats as $fileFormat) {
+            if (Storage::disk('public')->exists($this->ggrem . $fileFormat)) {
                 return $this->ggrem . $fileFormat;
             }
         }

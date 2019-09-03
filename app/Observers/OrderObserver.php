@@ -6,13 +6,15 @@ use App\Order;
 
 class OrderObserver
 {
-    public function creating(Order $order) {
+    public function creating(Order $order)
+    {
         $order->fill([
             'codigo' => $this->uniqueCode()
         ]);
     }
 
-    private function uniqueCode() {
+    private function uniqueCode()
+    {
         $now = new \DateTime();
 
         return $now->format('HisudmY');

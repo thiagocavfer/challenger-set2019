@@ -8,17 +8,18 @@ use App\Http\Resources\MedicineCollection;
 
 class MedicineController extends Controller
 {
-    public function show(Request $request) {
+    public function show(Request $request)
+    {
         $query = Medicine::query();
 
-        if($filter = $request->query('filtro')) {
+        if ($filter = $request->query('filtro')) {
             $query = $query
                 ->where('nome', 'LIKE', "%{$filter}%")
                 ->orWhere('principio_ativo', 'LIKE', "%{$filter}%")
                 ->orWhere('laboratorio', 'LIKE', "%{$filter}%");
         }
 
-        if(($orderBy = $request->query('ordenar_por'))
+        if (($orderBy = $request->query('ordenar_por'))
             && ($orderBy == 'nome' || $orderBy == 'valor_unitario')
         ) {
             $direction = ($request->query('direção') == 'desc') ? 'desc': 'asc';

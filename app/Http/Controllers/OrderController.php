@@ -9,11 +9,12 @@ use App\OrderMedicines;
 
 class OrderController extends Controller
 {
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $medicines = $request->input('medicamentos');
 
         $order = Order::create();
-        foreach($medicines as $medicine) {
+        foreach ($medicines as $medicine) {
             OrderMedicines::create([
                 'order_id' => $order->id,
                 'nome' => $medicine['nome'],
@@ -26,7 +27,8 @@ class OrderController extends Controller
         return $this->getPdf($order, $medicines);
     }
 
-    private function getPdf($order, $medicines) {
+    private function getPdf($order, $medicines)
+    {
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('order', [
             'codigo' => $order->codigo,
