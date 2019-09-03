@@ -1,0 +1,51 @@
+version: '3'
+services:
+  php:
+    container_name: php
+    image: webdevops/php-apache
+    restart: always
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html/public
+    volumes:
+      - ./server:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      desafio:
+        ipv4_address: 10.11.0.2
+
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    env_file:
+      - mariadb.env
+    ports:
+      - "3306:3306"
+    networks:
+      desafio:
+        ipv4_address: 10.11.0.3
+
+  node:
+    image: node
+    container_name: node
+    restart: always
+    volumes:
+      - ./client:/app
+    working_dir: /app
+    command: "npm start"
+    ports:
+      - "3000:3000"
+    networks:
+      desafio:
+        ipv4_address: 10.11.0.4
+
+networks:
+  desafio:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.11.0.0/24
+
