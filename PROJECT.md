@@ -11,11 +11,10 @@ cp ./server/.env.example server/.env
 chmod -R 777 ./server/storage
 chmod -R 777 ./server/bootstrap/cache
 docker-compose up -d
-docker exec -it mariadb bash -c "mysql -u root < /sql/script.sql"
-dpcker exec -it php composer install
-docker exec -it php php artisan key:generate
-docker exec -it php php artisan migrate
-docker exec -it php php artisan db:seed
+dpcker exec -it php bash -c "composer install"
+docker exec -it php bash -c "php artisan key:generate"
+docker exec -it php bash -c "php artisan migrate"
+docker exec -it php bash -c "php artisan db:seed"
 
 ```
 

@@ -22,8 +22,6 @@ services:
     restart: always
     env_file:
       - mariadb.env
-    volumes:
-      - ./sql:/sql
     ports:
       - "3306:3306"
     networks:
