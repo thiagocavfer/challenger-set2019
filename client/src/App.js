@@ -11,7 +11,7 @@ class App extends Component{
                     <Link to="/" className="navbar-brand">Shopping</Link>
                     <ul className="nav justify-content-end">
                         <li className="nav-item active">
-                            <Link to="/" className="nav-link">Pedido</Link>
+                            <Link to="/" className="nav-link">Busca</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/cart" className="nav-link">Carrinho</Link>

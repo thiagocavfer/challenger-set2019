@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import '../css/ResultItem.css';
+import React, { Component } from 'react'
+import '../css/ResultItem.css'
+import { connect } from 'react-redux'
+import { addToCart } from '../actions/CartActions'
 
 class ResultItem extends Component{
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			qty: 1,
-			selectValue: 1,
-			price: 0,
-		};
+			selectValue: 1
+		}
 		this.handleChange = this.handleChange.bind(this);
     	this.handleClick = this.handleClick.bind(this);
 	}
@@ -19,11 +19,15 @@ class ResultItem extends Component{
   	}
 
     handleClick(event) {
-    	this.setState({
-      		qty: this.props.selectValue,
-      		price: this.props.valor_unitario,
-    	});
-    	this.props.handleTotal(this.props.valor_unitario);
+    	const { id, laboratorio, nome, valor_unitario } = this.props
+    	let data = {
+    		id,
+    		laboratorio,
+    		nome,
+    		valor_unitario,
+    		quantidade: this.state.selectValue
+    	}
+    	this.props.addToCart(data)
     	event.preventDefault()
 	}
 
@@ -74,4 +78,4 @@ class ResultItem extends Component{
     }
 }
 
-export default ResultItem;
+export default connect(null, {addToCart}) (ResultItem);

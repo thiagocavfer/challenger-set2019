@@ -4,7 +4,8 @@ import ResultItem from './ResultItem.js';
 class Results extends Component{
     render(){
     	var resultItems = this.props.searchResults.map(function(medicamento){
-    		return <ResultItem key={medicamento.id} 
+    		return <ResultItem key={medicamento.id}
+                               id={medicamento.id}
     						   nome={medicamento.nome}
     						   avatar={medicamento.avatar}
     						   laboratorio={medicamento.laboratorio}
