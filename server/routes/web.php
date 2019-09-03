@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('pedidos')->group(function () {
+	Route::get('/{id}', 'PedidoController@generatePDF');
+});

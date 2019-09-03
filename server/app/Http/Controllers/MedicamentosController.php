@@ -34,7 +34,7 @@ class MedicamentosController extends Controller
     public function search($term)
     {
         $medicamentos = Medicamento::search($term)->get();
-        return Response::json(array('data' => $medicamentos));        
+        return Response::json(array('data' => $medicamentos));
     }
 
 }

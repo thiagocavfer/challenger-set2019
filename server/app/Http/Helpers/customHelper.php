@@ -15,3 +15,8 @@ function searchImage($directory, $name, $extensions = ['jpg', 'png'])
     }
     return basename($files[0]);
 }
+
+function formatMoeda($value)
+{
+    return "R$ " . number_format((float)$value, 2, ',', '.');
+}

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios';
 import { removeFromCart, clearCart } from './actions/CartActions'
+import { hide } from './actions/AlertActions'
+
 import './css/carrinho.css'
 import { formatMoeda } from './utils';
 import Alert from './components/Alert';
@@ -15,6 +17,10 @@ class Carrinho extends Component{
             modalIsVisible: false,
             modalMsg: ''
         }
+    }
+
+    componentWillMount() {
+        this.props.hide()
     }
 
     renderList() {
@@ -113,13 +119,18 @@ class Carrinho extends Component{
     }
 
     salvarPedido() {
-        var url = `http://localhost/api/pedidos`;
-        console.log(this.getPostData());
+        var url = 'http://localhost/api/pedidos'
+        var urlPdf = 'http://localhost/pedidos/'
+        const self = this
         axios.post(url, {
             itens: this.getPostData()
         })
         .then(function (response) {
-            this.props.clearCart()
+            self.setState({
+                modalMsg: `Seu Pedido foi salvo. Para imprimir o pedido <a href="${urlPdf}${response.data.pedido_id}">clique aqui</a>`,
+                modalIsVisible: true
+            })
+            self.props.clearCart()
         })
         .catch(function (error) {
             console.log(error);
@@ -140,8 +151,8 @@ class Carrinho extends Component{
                         </li>
                     </ul>
                 </nav>
-                <Alert visible={this.state.modalIsVisible} text={this.state.modalMsg} />
                 <div className="container">
+                    <Alert visible={this.state.modalIsVisible} text={this.state.modalMsg} />
                     <h4>Carrinho</h4>
                         { this.props.cart.itens.length ? this.renderCart() : this.renderEmptyCart() }
                 </div>
@@ -156,4 +167,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { removeFromCart, clearCart }) (Carrinho);
+export default connect(mapStateToProps, { removeFromCart, clearCart, hide }) (Carrinho);

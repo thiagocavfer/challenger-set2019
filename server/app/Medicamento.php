@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Medicamento extends Model
 {
 	public $timestamps = false;
-	
+
 	protected $appends = ['avatar'];
 
 	protected $fillable = ['ggrem','principio_ativo','nome','laboratorio','apresentacao','valor_unitario','estoque_inicial'];

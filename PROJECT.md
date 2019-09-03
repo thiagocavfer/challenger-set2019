@@ -19,16 +19,16 @@ docker exec -it php php artisan db:seed
 
 ```
 
-3 - Para testar a aplicação server (API), apontar para:
+3 - Endpoints da aplicação server:
 
-`http://localhost/medicamentos` para listar todos os medicamentos
-
-`http://localhost/medicamentos/{id}` para listar um medicamento
-
-`http://localhost/medicamentos/search/{term}` para pesquisar medicamentos
+GET `http://localhost/api/medicamentos` para listar todos os medicamentos
+GET `http://localhost/api/medicamentos/{id}` para listar um medicamento
+GET `http://localhost/api/medicamentos/search/{term}` para pesquisar medicamentos
+POST `http://localhost/api/pedidos` para salvar um pedido
+GET `http://localhost/pedidos/{id}` para gerar o PDF de um pedido
 
 
 4 - Para testar a aplicação client, acessar:
 
-`http://localhost:3000`	  
+`http://localhost:3000`
 
