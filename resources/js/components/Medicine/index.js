@@ -23,28 +23,43 @@ export default class FilterForm extends React.PureComponent {
     }
   }
 
-  handleClick(event) {
+  handleClick() {
     const medicine = {
+      ggrem: this.props.code,
       nome: this.props.heading,
       laboratorio: this.props.subheading,
       valor_unitario: this.props.price,
-      quantidade: this.state.quantity
+      quantidade: parseInt(this.state.quantity)
     };
 
-    const oldStorageValue = JSON.parse(localStorage.getItem('medicamentos'));
-    const value = oldStorageValue
-      ? oldStorageValue.concat(medicine)
-      : [medicine];
-
-    localStorage.setItem('medicamentos', JSON.stringify(value));
-
-    alert('Medicamento reservado com sucesso!');
-    
+    this.addMedicineToStorage(medicine);
     this.resetState();
   }
 
   handleSubmit() {
     event.preventDefault();
+  }
+
+  addMedicineToStorage(medicine) {
+    const storageValues = JSON.parse(localStorage.getItem('medicamentos'));
+    let value;
+
+    if (storageValues) {
+      for (let i = 0; i < storageValues.length; i++) {
+        if (medicine.ggrem === storageValues[i].ggrem) {
+          medicine.quantidade += parseInt(storageValues[i].quantidade);
+          storageValues.splice(i, 1);
+          break;
+        }
+      }
+      value = storageValues.concat(medicine);
+    } else {
+      value = [medicine];
+    }
+
+    localStorage.setItem('medicamentos', JSON.stringify(value));
+
+    alert('Medicamento reservado com sucesso!');
   }
 
   resetState() {

@@ -89,6 +89,7 @@ export default class Medicines extends React.PureComponent {
           {items.data.map((item, key) => (
             <div className="col-sm-6 col-md-4 col-lg-3" key={key}>
               <Medicine
+                code={item.ggrem}
                 image={item.avatar}
                 heading={item.nome}
                 subheading={item.laboratorio}
