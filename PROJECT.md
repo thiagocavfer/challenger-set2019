@@ -23,4 +23,3 @@ Tentei fazer uso dos padrões do Laravel e do React o tanto quanto possível, e 
 - Melhorar os estilos. O layout e design estão bem básicos, especialmente no PDF.
 - React Context: Acho que seria interessante desenvolver um mínimo sistema de notificações utilizando React Context e os Toasts do Bootstrap.
 - PhpSpreadSheet: A solução utilizando `.csv` é eficaz, mas talvez fuja um pouco do que vocês queriam. Com mais tempo, implementaria a biblioteca PhpSpreadSheet para gerar os seeders direto do `.xlsx`.
-- PHP_CodeSniffer no projeto: O ESLint está rodando como uma dependência do projeto, mas o PHP_CodeSniffer roda globalmente. Para manter uma consistência, e também para devida utilização da biblioteca, eu faria com que o PHP_CodeSniffer também rodasse como uma dependência.
