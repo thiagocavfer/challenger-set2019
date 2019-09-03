@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import Reservation from '../Reservation';
 import ReservationsSummary from '../ReservationsSummary';
 
 export default class Reservations extends React.PureComponent {
@@ -6,6 +8,7 @@ export default class Reservations extends React.PureComponent {
     super();
     this.state = {
       items: null,
+      totalValue: 'Calculando...'
     };
     this.getItems = this.getItems.bind(this);
   }
@@ -18,6 +21,21 @@ export default class Reservations extends React.PureComponent {
     this.setState({
       items: JSON.parse(localStorage.getItem('medicamentos'))
     });
+  }
+
+  getTotalValue(item) {
+    axios
+      .post('/api/calcular-valor-total', {
+        'valor_unitario': item.valor_unitario,
+        'quantidade': item.quantidade
+      })
+      .then(response => {
+        this.setState({ totalValue: `R$ ${response.data.toFixed(2)}` });
+      })
+      .catch(function (error) {
+        this.setState({ totalValue: 'Erro ao calcular valor total' });
+        console.log(error);
+      });
   }
 
   buildItems(items) {
@@ -36,21 +54,19 @@ export default class Reservations extends React.PureComponent {
               </thead>
               <tbody>
                 {items.map((item, key) => (
-                  <tr key={key}>
-                    <td>{item.quantidade}x {item.nome}</td>
-                    <td>{item.laboratorio}</td>
-                    <td>R$ {item.valor_unitario}</td>
-                    <td>R$ {this.getTotalValue(item)}</td>
-                  </tr>
+                  <Reservation
+                    key={key}
+                    name={item.nome}
+                    laboratory={item.laboratorio}
+                    unitValue={item.valor_unitario}
+                    quantity={item.quantidade}
+                  />
                 ))}
               </tbody>
             </table>
           </div>
           <hr />
-          <ReservationsSummary
-            items={items}
-            getTotalValue={this.getTotalValue}
-          />
+          <ReservationsSummary items={items} />
         </React.Fragment>
       );
     }
@@ -58,11 +74,6 @@ export default class Reservations extends React.PureComponent {
     return (
       <p className="lead">Você ainda não reservou nenhum medicamento.</p>
     );
-  }
-
-  getTotalValue(item) {
-    return (parseFloat(item.valor_unitario) * parseInt(item.quantidade))
-      .toFixed(2);
   }
 
   render() {

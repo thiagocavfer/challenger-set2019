@@ -14,4 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/medicamentos', 'MedicineController@show');
+Route::post('/calcular-valor-total', 'ReservationsController@getTotalValue');
+Route::post(
+    '/calcular-quantidade-total',
+    'ReservationsController@getTotalQuantity'
+);
+Route::post('/calcular-total-geral', 'ReservationsController@getFullValue');
 Route::post('/reservar', 'OrderController@create');
