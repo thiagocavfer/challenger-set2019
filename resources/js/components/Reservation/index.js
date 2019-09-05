@@ -7,6 +7,7 @@ export default class Reservations extends React.PureComponent {
     this.state = {
       totalValue: 'Calculando...'
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +29,10 @@ export default class Reservations extends React.PureComponent {
       });
   }
 
+  handleClick() {
+    this.props.undo(this.props.ggrem);
+  }
+
   render() {
     return (
       <tr>
@@ -35,6 +40,14 @@ export default class Reservations extends React.PureComponent {
         <td>{this.props.laboratory}</td>
         <td>R$ {this.props.unitValue}</td>
         <td>{this.state.totalValue}</td>
+        <td className="text-right">
+          <button
+            className="btn btn-danger"
+            onClick={this.handleClick}
+          >
+            Desfazer reserva
+          </button>
+        </td>
       </tr>
     );
   }

@@ -11,6 +11,7 @@ export default class Reservations extends React.PureComponent {
       totalValue: 'Calculando...'
     };
     this.getItems = this.getItems.bind(this);
+    this.handleUndo = this.handleUndo.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,26 @@ export default class Reservations extends React.PureComponent {
       });
   }
 
+  handleUndo(ggrem) {
+    const storageValues = JSON.parse(localStorage.getItem('medicamentos'));
+    for (let i = 0; i < storageValues.length; i++) {
+      if (ggrem === storageValues[i].ggrem) {
+        storageValues.splice(i, 1);
+        break;
+      }
+    }
+
+    if (storageValues.length) {
+      localStorage.setItem('medicamentos', JSON.stringify(storageValues));
+    } else {
+      localStorage.removeItem('medicamentos');
+    }
+    
+    this.getItems();
+    
+    alert('Reserva desfeita com sucesso!');
+  }
+
   buildItems(items) {
     if (items) {
       return (
@@ -50,16 +71,19 @@ export default class Reservations extends React.PureComponent {
                   <th scope="col">Laboratório</th>
                   <th scope="col">Valor unitário</th>
                   <th scope="col">Valor total</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {items.map((item, key) => (
                   <Reservation
                     key={key}
+                    ggrem={item.ggrem}
                     name={item.nome}
                     laboratory={item.laboratorio}
                     unitValue={item.valor_unitario}
                     quantity={item.quantidade}
+                    undo={this.handleUndo}
                   />
                 ))}
               </tbody>
