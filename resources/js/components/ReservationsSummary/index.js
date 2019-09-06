@@ -17,14 +17,9 @@ export default class Reservations extends React.PureComponent {
   }
 
   getTotalQuantity(items) {
-    let quantities = [];
-    items.forEach((item, i) => (
-      quantities[i] = item.quantidade
-    ));
-
     axios
       .post('/api/calcular-quantidade-total', {
-        quantidades: quantities
+        'medicines': items
       })
       .then(response => {
         this.setState({ totalQuantity: `${response.data} medicamento(s)` });
@@ -36,17 +31,9 @@ export default class Reservations extends React.PureComponent {
   }
 
   getFullValue(items) {
-    let unitValues = [];
-    let quantities = [];
-    items.forEach((item, i) => {
-      unitValues[i] = item.valor_unitario;
-      quantities[i] = item.quantidade;
-    });
-
     axios
       .post('/api/calcular-total-geral', {
-        'valores_unitarios': unitValues,
-        'quantidades': quantities
+        'medicines': items
       })
       .then(response => {
         this.setState({ fullValue: `R$ ${response.data.toFixed(2)}` });
@@ -68,14 +55,11 @@ export default class Reservations extends React.PureComponent {
       }
     })
       .then(response => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', `pedido-de-reservas-${new Date().getTime()}.pdf`);
-        link.dispatchEvent(new MouseEvent('click'));
-        window.URL.revokeObjectURL(url);
-        // localStorage.clear();
-        // this.getItems();
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+        
+        this.props.conclude();
       })
       .catch(function (error) {
         console.log(error);

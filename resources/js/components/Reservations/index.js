@@ -12,6 +12,7 @@ export default class Reservations extends React.PureComponent {
     };
     this.getItems = this.getItems.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
+    this.handleConclude = this.handleConclude.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +60,13 @@ export default class Reservations extends React.PureComponent {
     alert('Reserva desfeita com sucesso!');
   }
 
+  handleConclude() {
+    localStorage.clear();
+    this.getItems();
+    
+    alert('Pedido concluido com sucesso!');
+  }
+
   buildItems(items) {
     if (items) {
       return (
@@ -90,7 +98,10 @@ export default class Reservations extends React.PureComponent {
             </table>
           </div>
           <hr />
-          <ReservationsSummary items={items} />
+          <ReservationsSummary
+            items={items}
+            conclude={this.handleConclude}
+          />
         </React.Fragment>
       );
     }
