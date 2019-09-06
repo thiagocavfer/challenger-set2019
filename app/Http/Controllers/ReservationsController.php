@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\ReservationsHelper;
 
 class ReservationsController extends Controller
 {
@@ -19,7 +20,10 @@ class ReservationsController extends Controller
         $quantity = $request->input('quantidade');
 
         if (true === $this->verifyTotalValueInput($unitValue, $quantity)) {
-            return $this->quantityTimesUnitValue($unitValue, $quantity);
+            return ReservationsHelper::quantityTimesUnitValue(
+                $unitValue,
+                $quantity
+            );
         }
 
         return response('A verificação do input não foi bem-sucedida.', 400);
@@ -33,10 +37,10 @@ class ReservationsController extends Controller
      */
     public function getTotalQuantity(Request $request)
     {
-        $quantities = $request->input('quantidades');
+        $medicines = $request->input('medicines');
 
-        if (true === $this->verifyTotalQuantityInput($quantities)) {
-            return array_sum($quantities);
+        if (true === $this->verifyTotalQuantityInput($medicines)) {
+            return ReservationsHelper::getTotalQuantity($medicines);
         }
 
         return response('A verificação do input não foi bem-sucedida.', 400);
@@ -50,34 +54,20 @@ class ReservationsController extends Controller
      */
     public function getFullValue(Request $request)
     {
-        $unitValues = $request->input('valores_unitarios');
-        $quantities = $request->input('quantidades');
+        $medicines = $request->input('medicines');
 
-        if (true === $this->verifyFullValueInput($unitValues, $quantities)) {
-            $fullValue = 0;
-            for ($i = 0; $i < count($unitValues); $i++) {
-                $fullValue += $this->quantityTimesUnitValue(
-                    $unitValues[$i],
-                    $quantities[$i]
-                );
-            }
-
-            return $fullValue;
+        if (true === $this->verifyFullValueInput($medicines)) {
+            return ReservationsHelper::getFullValue($medicines);
         }
 
         return response('A verificação do input não foi bem-sucedida.', 400);
     }
-
-    private function quantityTimesUnitValue($unitValue, $quantity)
-    {
-        return (floatVal($unitValue) * intval($quantity));
-    }
     
     /**
-     * Verificação o input do valor total.
+     * Verificação do input do valor total.
      *
-     * @param $unitValue
-     * @param $quantity
+     * @param string $unitValue
+     * @param string $quantity
      * @return bool
      */
     private function verifyTotalValueInput($unitValue, $quantity)
@@ -86,25 +76,52 @@ class ReservationsController extends Controller
     }
 
     /**
-     * Verificação o input da quantidade total.
+     * Verificação do input da quantidade total.
      *
-     * @param $quantities
+     * @param array $medicines
      * @return bool
      */
-    private function verifyTotalQuantityInput($quantities)
+    private function verifyTotalQuantityInput($medicines)
     {
-        return is_array($quantities);
+        if (!is_array($medicines)) {
+            return false;
+        }
+
+        for ($i = 0; $i < count($medicines); $i++) {
+            if (!is_array($medicines[$i])
+                || !array_key_exists('quantidade', $medicines[$i])
+                || !$medicines[$i]['quantidade']
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
-     * Verificação o input do total geral.
+     * Verificação do input do total geral.
      *
-     * @param $unitValues
-     * @param $quantities
+     * @param array $medicines
      * @return bool
      */
-    private function verifyFullValueInput($unitValues, $quantities)
+    private function verifyFullValueInput($medicines)
     {
-        return (is_array($unitValues) && is_array($quantities));
+        if (!is_array($medicines)) {
+            return false;
+        }
+
+        for ($i = 0; $i < count($medicines); $i++) {
+            if (!is_array($medicines[$i])
+                || !array_key_exists('valor_unitario', $medicines[$i])
+                || !array_key_exists('quantidade', $medicines[$i])
+                || !$medicines[$i]['valor_unitario']
+                || !$medicines[$i]['quantidade']
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
