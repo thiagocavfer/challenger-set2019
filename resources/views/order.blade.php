@@ -51,7 +51,7 @@
         </p>
         <p>
           <strong>Total geral do pedido:&nbsp;</strong>
-          {{ ReservationsHelper::getFullValue($medicines) }}
+          {{ number_format(ReservationsHelper::getFullValue($medicines), 2) }}
         </p>
     </body>
 </html>
