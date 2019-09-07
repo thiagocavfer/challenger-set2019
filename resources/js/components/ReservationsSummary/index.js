@@ -16,6 +16,13 @@ export default class Reservations extends React.PureComponent {
     this.getFullValue(this.props.items);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.items !== prevProps.items) {
+      this.getTotalQuantity(this.props.items);
+      this.getFullValue(this.props.items);
+    }
+  }
+
   getTotalQuantity(items) {
     axios
       .post('/api/calcular-quantidade-total', {
