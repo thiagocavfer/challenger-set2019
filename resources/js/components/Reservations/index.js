@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Reservation from '../Reservation';
 import ReservationsSummary from '../ReservationsSummary';
 
@@ -7,8 +6,7 @@ export default class Reservations extends React.PureComponent {
   constructor () {
     super();
     this.state = {
-      items: null,
-      totalValue: 'Calculando...'
+      items: null
     };
     this.getItems = this.getItems.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
@@ -23,21 +21,6 @@ export default class Reservations extends React.PureComponent {
     this.setState({
       items: JSON.parse(localStorage.getItem('medicamentos'))
     });
-  }
-
-  getTotalValue(item) {
-    axios
-      .post('/api/calcular-valor-total', {
-        'valor_unitario': item.valor_unitario,
-        'quantidade': item.quantidade
-      })
-      .then(response => {
-        this.setState({ totalValue: `R$ ${response.data.toFixed(2)}` });
-      })
-      .catch(function (error) {
-        this.setState({ totalValue: 'Erro ao calcular valor total' });
-        console.log(error);
-      });
   }
 
   handleUndo(ggrem) {
