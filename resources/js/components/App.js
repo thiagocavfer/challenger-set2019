@@ -9,14 +9,14 @@ import Footer from './Footer';
 export default class App extends React.PureComponent {
   render() {
     return (
-      <BrowserRouter>
-        <React.Fragment>
+      <React.Fragment>
+        <BrowserRouter>
           <Header />
           <Route path="/" exact component={Medicines} />
           <Route path="/reservas/" component={Reservations} />
-          <Footer />
-        </React.Fragment>
-      </BrowserRouter>
+        </BrowserRouter>
+        <Footer />
+      </React.Fragment>
     );
   }
 }
