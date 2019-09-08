@@ -64,8 +64,12 @@ export default class Reservations extends React.PureComponent {
       .then(response => {
         const blob = new Blob([response.data], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
-        window.open(url);
-        
+        const link = document.createElement('a');
+
+        link.setAttribute('href', url);
+        link.dispatchEvent(new MouseEvent('click'));
+
+        window.URL.revokeObjectURL(url);
         this.props.conclude();
       })
       .catch(function (error) {
@@ -75,8 +79,8 @@ export default class Reservations extends React.PureComponent {
 
   render() {
     return (
-      <div className="d-flex flex-row">
-        <div className="flex-grow-1">
+      <div className="row">
+        <div className="col-6">
           <p className="h5">
             Quantidade total:&nbsp;
             <span className="text-primary">{this.state.totalQuantity}</span>
@@ -86,7 +90,7 @@ export default class Reservations extends React.PureComponent {
             <span className="text-primary">{this.state.fullValue}</span>
           </p>
         </div>
-        <div className="justify-content-end">
+        <div className="col-6 text-right">
           <button
             className="btn btn-lg btn-primary"
             onClick={this.handleClick}
