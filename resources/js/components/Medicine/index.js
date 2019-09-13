@@ -1,0 +1,121 @@
+import React from 'react';
+
+export default class FilterForm extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      disabled: true,
+      quantity: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.resetState = this.resetState.bind(this);
+  }
+
+  handleChange(event) {
+    if (event.target.value && event.target.value > 0) {
+      this.setState({
+        disabled: false,
+        quantity: event.target.value
+      });
+    } else {
+      this.resetState();
+    }
+  }
+
+  handleClick() {
+    const medicine = {
+      ggrem: this.props.code,
+      nome: this.props.heading,
+      laboratorio: this.props.subheading,
+      valor_unitario: this.props.price,
+      quantidade: parseInt(this.state.quantity)
+    };
+
+    this.addMedicineToStorage(medicine);
+    this.resetState();
+  }
+
+  handleSubmit() {
+    event.preventDefault();
+  }
+
+  addMedicineToStorage(medicine) {
+    const storageValues = JSON.parse(localStorage.getItem('medicamentos'));
+    let value;
+
+    if (storageValues) {
+      for (let i = 0; i < storageValues.length; i++) {
+        if (medicine.ggrem === storageValues[i].ggrem) {
+          medicine.quantidade += parseInt(storageValues[i].quantidade);
+          storageValues.splice(i, 1);
+          break;
+        }
+      }
+      value = storageValues.concat(medicine);
+    } else {
+      value = [medicine];
+    }
+
+    localStorage.setItem('medicamentos', JSON.stringify(value));
+
+    alert('Medicamento reservado com sucesso!');
+  }
+
+  resetState() {
+    this.setState({
+      disabled: true,
+      quantity: ''
+    });
+  }
+
+  render() {
+    return (
+      <div className="card mb-4">
+        { this.props.image && 
+          <img
+            src={`/storage/${this.props.image}`}
+            alt=""
+            className="card-img-top"
+          />
+        }
+        <div className="card-body">
+          <h2 className="h3 card-title">
+            {this.props.heading}
+            <br/>
+            <small className="text-muted">{this.props.subheading}</small>
+          </h2>
+          <p>{this.props.text}</p>
+          <span className="h4">R$ <span className="text-primary">{this.props.price}</span></span>
+        </div>
+        <div className="card-footer">
+          <form onSubmit={this.handleSubmit}>
+            <div className="input-group">
+              <input
+                type="number"
+                min="1"
+                className="form-control"
+                placeholder="Qtde."
+                aria-label="Quantidade"
+                aria-describedby="add-button"
+                value={this.state.quantity}
+                onChange={this.handleChange}
+              />
+              <div className="input-group-append">
+                <button
+                  className='btn btn-primary'
+                  type="button"
+                  id="add-button"
+                  onClick={this.handleClick}
+                  disabled={this.state.disabled}
+                >
+                  Reservar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
